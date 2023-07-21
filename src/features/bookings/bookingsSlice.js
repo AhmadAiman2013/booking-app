@@ -67,9 +67,19 @@ const bookingsSlice = createSlice({
          .addCase(deleteBooking.fulfilled, (state, action) => {
            state.bookings = state.bookings.filter((booking) => booking.id !== action.payload)
          })
-         .addCase(updateBooking.rejected, (state, action) => {
+         .addCase(fetchAllBooking.rejected, (state, action) => {
           state.error = action.error.message;
+          state.bookings = [];
+          state.loading = false;
         })
+        .addCase(fetchBooking.rejected, (state, action) => {
+          state.error = action.error.message;
+          state.bookings = []; 
+          state.loading = false;
+        })
+        .addCase(updateBooking.rejected, (state, action) => {
+          state.error = action.error.message;
+        });
         
     }
     
